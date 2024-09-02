@@ -1,0 +1,90 @@
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import DefaultLayout from "./components/DefaultLayout";
+import GuestLayout from "./components/GuestLayout";
+import Dashboard from "./views/Dashboard";
+import Login from "./views/Login";
+import Signup from "./views/Signup";
+import SurveyPublicView from "./views/SurveyPublicView";
+import Products from "./views/products";
+import ProductView from "./views/ProductView";
+import BOQ from "./views/boq";
+import ProductDetail from "./views/ProductPage";
+import AddMaterial from "./views/AddMaterial";
+import AllProducts from "./views/AllProducts";
+import ProductPage from "./views/ProductPage";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <DefaultLayout />,
+    children: [
+      {
+        path: '/dashboard',
+        element: <Navigate to="/" />
+      },
+      {
+        path: "/",
+        element: <Dashboard />,
+      },
+      {
+        path: "/products",
+        element: <Products />,
+      },
+      {
+        path: "/boq",
+        element: <BOQ />,
+      },
+      {
+        path: "/products/create",
+        element: <ProductView />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductView />,
+      },
+      {
+        path: "/products/detail",
+        element: <ProductDetail />,
+      },
+      {
+        path: "/create-product",
+        element: <ProductPage />,  // The page that contains ProductForm for creating a product
+      },
+      // New Route for Editing an Existing Product
+      {
+        path: "/edit-product/:id",
+        element: <ProductPage />,  // The same page but used for editing an existing product
+      },
+      {
+        path: "/addmaterial",
+        element: <AddMaterial />,
+      },
+      {
+        path: "/allproducts",
+        element: <AllProducts />,
+      },
+
+
+    ],
+  },
+  {
+    path: "/",
+    element: <GuestLayout />,
+    children: [
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+    ],
+  },
+  {
+    path: "/product/public/:slug",
+    element: <SurveyPublicView />,
+  },
+]);
+
+export default router;
